@@ -906,4 +906,3 @@ Existing Instance max_Proper.
 Existing Instance range1_Proper.
 Existing Instance floor_Proper.
 Existing Instance imageR_Proper.
-
