@@ -217,17 +217,29 @@ Proof. by rewrite halfg_add -addrA; case: oddgP. Qed.
 
 (* The infinite hypermap of a grid. *)
 
-Definition gedge d := d + (arcg (oddg d) - arcg (ccw (oddg d))).
+Fact gedge_key : unit. Proof. exact tt. Qed.
+Definition gedge_unlocked d := d + (arcg (oddg d) - arcg (ccw (oddg d))).
+Definition gedge d := match gedge_key with | _ => gedge_unlocked d end.
+Lemma unlock_gedge d : gedge d = gedge_unlocked d.
+Proof. by rewrite /gedge; case: gedge_key. Qed.
 
-Definition gnode d :=  d - arcg (oddg d).
+Fact gnode_key : unit. Proof. exact tt. Qed.
+Definition gnode_unlocked d :=  d - arcg (oddg d).
+Definition gnode d := match gnode_key with | _ => gnode_unlocked d end.
+Lemma unlock_gnode d : gnode d = gnode_unlocked d.
+Proof. by rewrite /gnode; case: gnode_key. Qed.
 
-Definition gface d := d + arcg (oddg d).
+Fact gface_key : unit. Proof. exact tt. Qed.
+Definition gface_unlocked d := d + arcg (oddg d).
+Definition gface d := match gface_key with | tt => gface_unlocked d end.
+Lemma unlock_gface d : gface d = gface_unlocked d.
+Proof. by rewrite /gface; case: gface_key. Qed.
 
 Lemma oddg_face d : oddg (gface d) = ccw (oddg d).
-Proof. by rewrite oddg_add subrK ccw_odd oddg_id. Qed.
+Proof. by rewrite unlock_gface oddg_add subrK ccw_odd oddg_id. Qed.
 
 Lemma halfg_face d : halfg (gface d) = halfg d.
-Proof. by rewrite halfg_add subrK ccw_odd (halfg_odd (oddgP _)) addr0. Qed.
+Proof. by rewrite unlock_gface halfg_add subrK ccw_odd (halfg_odd (oddgP _)) addr0. Qed.
 
 Lemma halfg_iter_face i d : halfg (iter i gface d) = halfg d.
 Proof. by elim: i => //= i IHi; rewrite halfg_face. Qed.
@@ -252,13 +264,19 @@ by move=> Ed12; rewrite !inE !Ed ?halfg_face // !oddg_face; do 2!case: oddgP.
 Qed.
 
 Lemma gnode_sub1 d : gnode d - Gpoint 1 1 = gface (d - Gpoint 1 1).
-Proof. by rewrite /gface -!addrA oddg_add; case: oddgP. Qed.
+Proof.
+by rewrite unlock_gface /gface_unlocked -!addrA oddg_add; case: oddgP.
+Qed.
 
 Lemma oddg_node d : oddg (gnode d) = ccw (oddg d).
-Proof. by rewrite -(oddg_add2 (arcg (oddg d))) addrCA addrK oddg_face. Qed.
+Proof.
+by rewrite -(oddg_add2 (arcg (oddg d))) addrCA addrK -[_ + _]unlock_gface oddg_face.
+Qed.
 
 Lemma halfg_node d : halfg (gnode d) = halfg d - arcg (oddg d).
-Proof. by rewrite -(halfg_face d) addrC -halfg_add2 addrCA subrK. Qed.
+Proof.
+by rewrite -(halfg_face d) addrC -halfg_add2 unlock_gface addrCA subrK.
+Qed.
 
 Lemma neq_halfg_node p : (halfg p == halfg (gnode p)) = false.
 Proof. by rewrite halfg_node -subr_eq0 opprD addNKr; case: oddgP. Qed.
@@ -276,7 +294,7 @@ by rewrite !inE -!gnode_sub1 !(inj_eq (addIr _)).
 Qed.
 
 Lemma gnode_face d : gnode (gface d) = gedge d.
-Proof. by rewrite [RHS]addrA -oddg_face. Qed.
+Proof. by rewrite [RHS]addrA -oddg_face unlock_gnode unlock_gface. Qed.
 
 Lemma oddg_edge p : oddg (gedge p) = ccw (ccw (oddg p)).
 Proof. by rewrite -gnode_face oddg_node oddg_face. Qed.
@@ -291,7 +309,9 @@ Lemma end0g_edge p : end0g (gedge p) = end1g p.
 Proof. by rewrite -gnode_face end0g_node end0g_face. Qed.
 
 Lemma gedge2 p : gedge (gedge p) = p.
-Proof. by rewrite {1}/gedge oddg_edge !arcg_ccw2 -opprD addrK. Qed.
+Proof.
+by rewrite unlock_gedge /gedge_unlocked oddg_edge !arcg_ccw2 -opprD addrK.
+Qed.
 
 Lemma end1g_edge p : end1g (gedge p) = end0g p.
 Proof. by rewrite -end0g_edge gedge2. Qed.

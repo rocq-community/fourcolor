@@ -215,7 +215,8 @@ rewrite [last _ _]/=; set d := last d0 mr0; set mr := d0 :: mr0.
 have ->: last d0 (refine_mring mr) = gface d *+ 2 + oddg d.
   by rewrite [mr]lastI /refine_mring -cats1 map_cat flatten_cat last_cat.
 elim: {d0 mr0}mr d => //= d2 _ IHmr d1 /andP[/eqP-Ed12 /IHmr{IHmr}->].
-rewrite -!subr_eq /end1g !halfg_eq ?oddg_eq ?eqxx // andbC -addrA eqxx /=.
+rewrite -!subr_eq /end1g !halfg_eq ?oddg_eq ?eqxx // andbC -addrA.
+rewrite unlock_gface eqxx /=.
 by rewrite -[gface d1]end0g_eq oddg_face subrK end0g_face Ed12 end0g_eq.
 Qed.
 
@@ -233,19 +234,21 @@ Lemma refine_mring_simple : uniq (map end0g (refine_mring (mring m))).
 Proof.
 have /hasPn := @mring_edge m; move: (mring m) (mring_simple m).
 elim=> //= d r IHr /andP[r'd Ur] /norP[_]; rewrite has_predU => /norP[r'E /IHr].
-move=> -> {Ur}//; rewrite !/(end0g _) !halfg_eq ?oddg_eq // inE -addrA subrK.
+move=> -> {Ur}//; rewrite !/(end0g _) !halfg_eq ?oddg_eq // inE.
+rewrite unlock_gface -addrA subrK.
 rewrite (inj_eq (addrI _)) eq_sym neq_ccw /= andbC.
 rewrite !(contra _ r'd) /end0g // => /mapP[d1 /in_refine_mring[d0 [r_d0 ->]]].
   case=> -> Dd; first by rewrite -[_ + _]halfg_add_odd Dd halfg_add_odd map_f.
   have /eqP/idPn[]:= congr1 oddg Dd; rewrite oddg_add oddg_double.
   by rewrite oddg_add oddg_face; case: (oddgP d0).
-case=> -> Dd; last rewrite -addrA subrK in Dd.
+case=> -> Dd; last rewrite unlock_gface -addrA subrK in Dd.
   have:= congr1 oddg Dd; rewrite [RHS]oddg_add oddg_double.
   by rewrite oddg_add; case: (oddgP d).
 suff Dd0: oddg d0 = oddg d by move: Dd; rewrite Dd0 => /addIr->; apply: map_f.
 have:= congr1 oddg Dd; rewrite oddg_add [RHS]oddg_add.
 have{r'E r_d0}: gedge d0 != d := hasPn r'E d0 r_d0.
-rewrite /gedge 2!addrA -Dd -!addrA -subr_eq0 [d + _ - d]addrC addKr.
+rewrite unlock_gedge /gedge_unlocked 2!addrA -Dd -!addrA -subr_eq0.
+rewrite [d + _ - d]addrC addKr.
 by do 2!case: oddgP.
 Qed.
 
@@ -356,7 +359,7 @@ Proof.
 rewrite /ext1_mring; case: (rot_to _) => i r Dr.
 case: (mring_equad m'f4d, mring_simple m); rewrite -(rot_uniq i) -(mem_rot i).
 move: (mring_equad m'f3d); rewrite -[LHS](mem_rot i) -map_rot {i}Dr.
-rewrite !map_cons !inE !end0g_edge -!end0g_face.
+rewrite !map_cons !inE end0g_edge -!end0g_face.
 move: {r}(map _ r) (gface d) => r d1 /=; rewrite !inE ![_ == end0g d1]eq_sym.
 move=> /norP[/negPf-> /negPf->] /norP[/negPf-> /negPf->] /andP[-> ->] /=.
 by rewrite eq_sym end0g_face (inj_eq (addrI _)) neq_ccw.
@@ -378,9 +381,9 @@ have [m'ef1d m'ef2d m'ef3d _] := and4P m'Eloop; rewrite !inE !(eq_sym p).
 have [<- | p'f1d] := altP eqP.
   by rewrite halfg_face eqxx m'd /= eq_sym -halfg_face neq_halfg_edge.
 have [<- | p'f2d] := altP eqP.
-  by rewrite !halfg_face eqxx m'd /= eq_sym -2!halfg_face neq_halfg_edge.
+  by rewrite 2!halfg_face eqxx m'd /= eq_sym -2!halfg_face neq_halfg_edge.
 have [<- | p'f3d] := altP eqP.
-  by rewrite !halfg_face eqxx m'd /= eq_sym -3!halfg_face neq_halfg_edge.
+  by rewrite 3!halfg_face eqxx m'd /= eq_sym -3!halfg_face neq_halfg_edge.
 rewrite /= negb_or andbCA andb_orl -[rhs in _ || rhs]in_mring orbC andbC.
 have [mr_p | mr'p] /= := boolP (p \in mring m).
   have [/andP[r'ed _]]: uniq (gedge d :: r) /\ p \in gedge d :: r.
@@ -446,7 +449,7 @@ Definition ext2_mring := let: exist (_, r) _ := ext2_P in ext2_loop ++ r.
 Lemma ext2_mring_cycle : cycle mrlink ext2_mring.
 Proof.
 rewrite /ext2_mring; case: ext2_P (mring_cycle m) => -[i r] /= Dr.
-rewrite -(rot_cycle i) {i}Dr /= !rcons_path /= end1g_edge !end0g_edge.
+rewrite -(rot_cycle i) {i}Dr /= !rcons_path /= end1g_edge 2!end0g_edge.
 rewrite !end0g_face !eqxx /= -[d in gedge d]gface4.
 by case: r => [|d1 r] /=; rewrite end1g_edge end0g_face.
 Qed.
@@ -586,10 +589,11 @@ have{IHn} IHp d: halfg d = p -> has (predD r0 (gchop1 d)) m -> extends_in r p.
     by rewrite (insetP r0p) // -Dp -(halfg_iter_face i) gedge2 gtouch_edge.
   have /= (d2 := gedge (gface (gface ed))): gchop_rect r0 d2 (halfg d2).
     have [q m_q /andP[d'q r0q]] := hasP m_r0d; apply: gchop_rect_edge (q) _.
-      by rewrite gedge2 (insetP r0p) // !halfg_face -Dp gtouch_edge.
+      by rewrite gedge2 (insetP r0p) // 2!halfg_face -Dp gtouch_edge.
     by rewrite in_gchop_rect /= r0q gchop_edge.
   rewrite in_gchop_rect /= gchop_halfg andbT; have [] := (r0efd 1, r0efd 3)%N.
-  rewrite !(Ded, halfg_edge, halfg_face, oddg_edge, oddg_face) -!addrA Dr0.
+  rewrite 3!halfg_edge 3!halfg_face halfg_edge Ded 3!halfg_face halfg_edge Ded.
+  rewrite 3!oddg_face oddg_edge 3!oddg_face oddg_edge -!addrA Dr0.
   by case: oddgP; do ![case/andP | move-> | clear 1].
 (* nd q is the dart of q whose edge separates q from gnode q *)
 pose nd (q : gpoint) : gpoint := q *+ 2 + iter 3 ccw (oddg q).
@@ -612,15 +616,18 @@ have m_nd4 q: r0 q -> has (equad (nd q)) m -> q \in m.
   by case: oddgP; rewrite /= ?addr0 ?addrK !(addrA _ 1 1) !ltzD1;
      do ![case/andP | move-> | clear 1].
 have gchop1F3E d: gchop1 (iter 3 gface (gedge d)) = gchop1 (gface d).
-  by rewrite -gchop1_shift gface4 gedge2.
+  by rewrite -gchop1_shift [gface (iter _ _ _)]gface4 gedge2.
 have ehex_shift_quad q q' (efq := gedge (gface q)):
   ehex q q' || ehex (gface efq) q' ==> equad q q' || equad efq q'.
 - have chop1idl q1 q2 b: gchop1 q1 q2 && b && gchop q1 q2 = gchop q1 q2 && b.
     by rewrite andbAC (andb_idl (@gchop_chop1 _ _)).
-  rewrite !(inE, in_gchop_rect) !gtouch_chop1 /= !andbT gface4 !chop1idl.
-  do 2!rewrite [in _ && _ && _]andbCA chop1idl; rewrite gchop_shift gchop1F3E.
+  rewrite !(inE, in_gchop_rect) !gtouch_chop1 /= gface4 !unlock_gface !andbT.
+  rewrite !chop1idl.
+  do 2!rewrite [in _ && _ && _]andbCA chop1idl.
+  rewrite -!unlock_gface gchop_shift gchop1F3E !unlock_gface.
   case: (gchop q _); rewrite //= orbC andbC andbCA; case: (gchop1 _ _) => //=.
-  rewrite andbT gchop_edge -[gface q as fq in gface (gface fq)]gedge2.
+  rewrite !andbT -!unlock_gface gchop_edge.
+  rewrite -[gface q as fq in gface (gface fq)]gedge2.
   by case: (gchop _ _); rewrite ?orbF; case: orP => //= -[]/andP[/gchop_chop1].
 have r0_np: r0 (gnode p).
   by rewrite (insetP r0p) // -hEnd -[p in gtouch p]h_nd gtouch_edge.
@@ -671,7 +678,7 @@ have m_n2p: gnode (gnode p) \in m.
   by rewrite -[p]h_nd gtouch_chop1 in p9q; case/and5P: p9q => /gchop_chop1-> ->.
 have r_np: r (gnode p).
   have: r (gnode (gnode p)) by rewrite r_m0 //= r0_n2p.
-  rewrite /gnode oddg_node -addrA; case: (p) (r) r_p => x y [x0 x1 y0 y1].
+  rewrite !unlock_gnode /gnode_unlocked oddg_node -addrA; case: (p) (r) r_p => x y [x0 x1 y0 y1].
   by case: oddgP; rewrite /= !addr0; do ![case/andP | move-> | clear 1].
 have ext1nd: ext1_hex m (nd (gnode p)).
   rewrite /ext1_hex !inE hEnd m_n2p; apply/hasP => -[q m_q nd4q].
