@@ -239,7 +239,9 @@ Lemma oddg_face d : oddg (gface d) = ccw (oddg d).
 Proof. by rewrite unlock_gface oddg_add subrK ccw_odd oddg_id. Qed.
 
 Lemma halfg_face d : halfg (gface d) = halfg d.
-Proof. by rewrite unlock_gface halfg_add subrK ccw_odd (halfg_odd (oddgP _)) addr0. Qed.
+Proof.
+by rewrite unlock_gface halfg_add subrK ccw_odd (halfg_odd (oddgP _)) addr0.
+Qed.
 
 Lemma halfg_iter_face i d : halfg (iter i gface d) = halfg d.
 Proof. by elim: i => //= i IHi; rewrite halfg_face. Qed.
@@ -270,7 +272,8 @@ Qed.
 
 Lemma oddg_node d : oddg (gnode d) = ccw (oddg d).
 Proof.
-by rewrite -(oddg_add2 (arcg (oddg d))) addrCA addrK -[_ + _]unlock_gface oddg_face.
+rewrite -(oddg_add2 (arcg (oddg d))) addrCA addrK.
+by rewrite -[_ + _]unlock_gface oddg_face.
 Qed.
 
 Lemma halfg_node d : halfg (gnode d) = halfg d - arcg (oddg d).
