@@ -678,7 +678,8 @@ have m_n2p: gnode (gnode p) \in m.
   by rewrite -[p]h_nd gtouch_chop1 in p9q; case/and5P: p9q => /gchop_chop1-> ->.
 have r_np: r (gnode p).
   have: r (gnode (gnode p)) by rewrite r_m0 //= r0_n2p.
-  rewrite !unlock_gnode /gnode_unlocked oddg_node -addrA; case: (p) (r) r_p => x y [x0 x1 y0 y1].
+  rewrite !unlock_gnode /gnode_unlocked oddg_node -addrA.
+  case: (p) (r) r_p => x y [x0 x1 y0 y1].
   by case: oddgP; rewrite /= !addr0; do ![case/andP | move-> | clear 1].
 have ext1nd: ext1_hex m (nd (gnode p)).
   rewrite /ext1_hex !inE hEnd m_n2p; apply/hasP => -[q m_q nd4q].
