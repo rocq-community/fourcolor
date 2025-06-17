@@ -36,16 +36,10 @@ license:
   identifier: CECILL-B
 
 supported_coq_versions:
-  text: 8.18 or later
-  opam: '{>= "8.18"}'
+  text: 8.20 or later
+  opam: '{>= "8.20"}'
 
 tested_coq_opam_versions:
-- version: '2.1.0-coq-8.18'
-  repo: 'mathcomp/mathcomp'
-- version: '2.2.0-coq-8.19'
-  repo: 'mathcomp/mathcomp'
-- version: '2.3.0-coq-8.20'
-  repo: 'mathcomp/mathcomp'
 - version: 'rocq-prover-dev'
   repo: 'mathcomp/mathcomp-dev'
 
@@ -56,9 +50,9 @@ ci_cron_schedule: '0 5 * * 0'
 dependencies:
 - opam:
     name: coq-mathcomp-ssreflect
-    version: '{>= "2.1.0"}'
+    version: '{>= "2.5.0"}'
   description: |-
-    [MathComp ssreflect 2.1.0 or later](https://math-comp.github.io)
+    [MathComp ssreflect 2.5.0 or later](https://math-comp.github.io)
 - opam:
     name: coq-mathcomp-algebra
   description: |-

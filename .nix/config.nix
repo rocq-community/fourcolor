@@ -36,12 +36,6 @@
   ## alternative configuration, the can be used to
   ## compute several ci jobs as well
   bundles = {
-    "8.18".coqPackages = {
-      coq.override.version = "8.18";
-    };
-    "8.19".coqPackages = {
-      coq.override.version = "8.19";
-    };
     "8.20".coqPackages = {
       coq.override.version = "8.20";
     };
