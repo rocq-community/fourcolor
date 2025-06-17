@@ -8,6 +8,10 @@
   ## of from the overlays located in `.nix/coq-overlays`
   attribute = "fourcolor";
 
+  ## Set this when the package has no rocqPackages version yet
+  ## (either in nixpkgs or in .nix/rocq-overlays)
+  no-rocq-yet = true;
+
   ## If you want to select a different attribute
   ## to serve as a basis for nix-shell edit this
   # shell-attribute = "{{nix_name}}";
@@ -38,14 +42,25 @@
   bundles = {
     "8.20".coqPackages = {
       coq.override.version = "8.20";
+      mathcomp.override.version = "master";
+      mathcomp-zify.override.version = "master";
+      mathcomp-algebra-tactics.override.version = "master";
+      mathcomp-finmap.override.version = "master";
+      graph-theory.override.version = "master";
     };
     "9.0".coqPackages = {
       coq.override.version = "9.0";
+      mathcomp.override.version = "master";
+      mathcomp-zify.override.version = "master";
+      mathcomp-algebra-tactics.override.version = "master";
+      mathcomp-finmap.override.version = "master";
+      graph-theory.override.version = "master";
     };
     "master" = { rocqPackages = {
       rocq-core.override.version = "master";
       rocq-elpi.override.version = "master";
       rocq-elpi.override.elpi-version = "2.0.7";
+      hierarchy-builder.override.version = "master";
       stdlib.override.version = "master";
     }; coqPackages = {
       coq.override.version = "master";
@@ -54,6 +69,10 @@
       hierarchy-builder.override.version = "master";
       mathcomp.override.version = "master";
       stdlib.override.version = "master";
+      mathcomp-zify.override.version = "master";
+      mathcomp-algebra-tactics.override.version = "master";
+      mathcomp-finmap.override.version = "master";
+      graph-theory.override.version = "master";
     }; };
 
   ## you may mark a package as a CI job as follows
