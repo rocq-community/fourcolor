@@ -19,15 +19,13 @@ jobs:
     strategy:
       matrix:
         image:
-          - 'mathcomp/mathcomp:2.1.0-coq-8.18'
-          - 'mathcomp/mathcomp:2.2.0-coq-8.19'
-          - 'mathcomp/mathcomp:2.3.0-coq-8.20'
           - 'mathcomp/mathcomp-dev:rocq-prover-dev'
       fail-fast: false
     steps:
       - uses: actions/checkout@v4
       - uses: coq-community/docker-coq-action@v1
         with:
+          opam_file: 'coq-fourcolor.opam'
           custom_image: ${{ matrix.image }}
           custom_script: |
             {{before_install}}
