@@ -793,7 +793,7 @@ have{IHp r'p}: sparse (pointer (ecpH G) :: map (icpH G) [:: node G, G : G & p]).
     have r'y := hasPn r'p _ p_y.
     by rewrite cnodeC (@cnode_injcp [:: CpH]) // cnodeC -mem_cpring.
   elim: p r'p IHp => [|x p IHp] //= /norP[r'x r'p].
-  rewrite !sparse_cons has_map => /andP[/contra->]; first exact: IHp.
+  rewrite !sparse_cons has_map => /andP[/contra sp]; rewrite sp; first exact: IHp.  (* TODO: replace sp by `->` when requiring Rocq >= 9.3 *)
   by apply: etrans; apply: eq_has => y; rewrite inE (@cnode_injcp [:: CpH]).
 rewrite {}/p head_proper_cpring // cpring_ecpH //.
 rewrite -cat1s sparse_catC cats1 -(cat1s (ecpH G : ecpH G)) sparse_catC cats1.

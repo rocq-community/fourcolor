@@ -408,8 +408,8 @@ Proof.
 rewrite [LHS]/genus /Euler_rhs /Euler_lhs (eq_n_comp gcomp_mirror).
 suffices <-: fcard edge G = fcard edge mirror.
   by rewrite (eq_n_comp cnode_mirror) (eq_n_comp cface_mirror).
-have:= adjunction_n_comp _ cedgeC (@cedgeC dual) _ mirror_edge_adj.
-by move->; first apply/esym/eq_n_comp/(same_fconnect_finv (@edgeI G)).
+have fcG := adjunction_n_comp _ cedgeC (@cedgeC dual) _ mirror_edge_adj.  (* TODO: replace `fcG` by `->` when requiring Rocq >= 9.3 *)
+by rewrite fcG; first apply/esym/eq_n_comp/(same_fconnect_finv (@edgeI G)).
 Qed.
 
 Lemma planar_mirror : planar mirror = planar G.

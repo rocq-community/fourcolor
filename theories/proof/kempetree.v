@@ -241,7 +241,7 @@ split=> [|et /=].
   have{ctu_lt_sz} [| [_ gtr0]] := ctu_lt_sz.
     rewrite (ctree_size_partition Pctu) addnC -ltn_subRL.
     case ctr0: (ctree_size ctr) => [|m]; last first.
-      by move/leq_trans->; [left | rewrite subSS leq_subr].
+      by move/leq_trans->; (try by left); rewrite subSS leq_subr. (* TODO replace this line by `by move/leq_trans->; [rewrite subSS leq_subr | left].` when requiring Rocq >= 9.3 *)
     by right; split=> [|[]] //; rewrite (ctree_size_proper ctr_ok ctr0).
   right; split => [|[]] //; rewrite (_ : ctr = CtreeEmpty) //.
   apply/(ctree_size_proper ctr_ok)/(@addnI (ctree_size ctu')).

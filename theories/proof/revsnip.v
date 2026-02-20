@@ -350,7 +350,7 @@ apply/nontrivial0P; split=> //; exists x3; apply/andP; split=> /=; last first.
 have r_x3: x3 \in r by rewrite Dr12 !inE r1x3.
 have:= Ur; rewrite -(rot_uniq ix) Dr Dcr1 Dp1 /= mem_cat orbC inE.
 apply: contraL; rewrite fband_cons cfaceC (same_cface xFx1).
-case/orP=> [|/hasP[y r2y]] /(scycle_cface scycRr)->; rewrite ?eqxx //.
+case/orP=> [|/hasP[y r2y]] /(scycle_cface scycRr) x13; rewrite x13 ?eqxx//.  (* TODO: replace x13 with `->` when requiring Rocq >= 9.3 *)
   by rewrite r2y andbF.
 by rewrite Dr12 !inE r2y orbT.
 Qed.
