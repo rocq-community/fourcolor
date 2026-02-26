@@ -4,6 +4,7 @@ From Corelib Require Import Morphisms Setoid.
 From mathcomp Require Import ssreflect ssrfun ssrbool eqtype ssrnat div order.
 From mathcomp Require Import ssralg ssrnum ssrint archimedean rat intdiv.
 From fourcolor Require Import real realsyntax.
+Set SsrOldRewriteGoalsOrder.  (* change Set to Unset when porting the file, then remove the line when requiring MathComp >= 2.6 *)
 
 (******************************************************************************)
 (*   This file establishes basic arithmetic/order/setoid properties of the    *)

@@ -7,6 +7,7 @@ From mathcomp Require Import ssrnum ssrint div intdiv.
 From fourcolor Require Import hypermap geometry coloring grid matte.
 From fourcolor Require Import real realplane.
 From fourcolor Require Import realsyntax realprop.
+Set SsrOldRewriteGoalsOrder.  (* change Set to Unset when porting the file, then remove the line when requiring MathComp >= 2.6 *)
 
 (******************************************************************************)
 (*   Approximations of real scalars, points, regions and rectangles, used to  *)

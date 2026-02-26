@@ -4,6 +4,7 @@ From mathcomp Require Import ssreflect ssrfun ssrbool eqtype ssrnat seq choice.
 From mathcomp Require Import fintype path fingraph.
 From mathcomp Require Import bigop order ssralg ssrnum ssrint.
 From fourcolor Require Import hypermap geometry quiztree part discharge.
+Set SsrOldRewriteGoalsOrder.  (* change Set to Unset when porting the file, then remove the line when requiring MathComp >= 2.6 *)
 
 (******************************************************************************)
 (* Ruling out a part using a combination of discharging and reducibility.     *)

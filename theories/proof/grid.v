@@ -4,6 +4,7 @@ From HB Require Import structures.
 From mathcomp Require Import ssreflect ssrfun ssrbool eqtype ssrnat seq path.
 From mathcomp Require Import div choice order ssralg ssrnum ssrint intdiv.
 From fourcolor Require Import hypermap.
+Set SsrOldRewriteGoalsOrder.  (* change Set to Unset when porting the file, then remove the line when requiring MathComp >= 2.6 *)
 
 (******************************************************************************)
 (*    Geometry over an integer grid, that is, raster graphics.                *)

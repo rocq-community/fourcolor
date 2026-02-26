@@ -5,6 +5,7 @@ From mathcomp Require Import fintype path fingraph.
 From fourcolor Require Import hypermap geometry color chromogram coloring cfmap.
 From fourcolor Require Import cfcolor dyck ctree initctree gtree initgtree.
 From fourcolor Require Import gtreerestrict ctreerestrict.
+Set SsrOldRewriteGoalsOrder.  (* change Set to Unset when porting the file, then remove the line when requiring MathComp >= 2.6 *)
 
 (******************************************************************************)
 (*   Here we put all the reducibility steps together, to compute the Kempe    *)

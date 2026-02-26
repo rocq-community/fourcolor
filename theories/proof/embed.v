@@ -4,6 +4,7 @@ From mathcomp Require Import ssreflect ssrfun ssrbool eqtype ssrnat seq choice.
 From mathcomp Require Import fintype path fingraph.
 From fourcolor Require Import hypermap geometry color chromogram coloring patch.
 From fourcolor Require Import snip revsnip kempe birkhoff contract.
+Set SsrOldRewriteGoalsOrder.  (* change Set to Unset when porting the file, then remove the line when requiring MathComp >= 2.6 *)
 
 (******************************************************************************)
 (*   This is the crux of the Four Color Theorem proof: we build an injective  *)

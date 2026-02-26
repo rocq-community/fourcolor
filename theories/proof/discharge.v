@@ -4,6 +4,7 @@ From mathcomp Require Import ssreflect ssrfun ssrbool eqtype ssrnat seq choice.
 From mathcomp Require Import fintype path fingraph.
 From mathcomp Require Import bigop order ssralg ssrnum ssrint.
 From fourcolor Require Import hypermap geometry part.
+Set SsrOldRewriteGoalsOrder.  (* change Set to Unset when porting the file, then remove the line when requiring MathComp >= 2.6 *)
 
 (******************************************************************************)
 (* Discharging arities to neighbouring faces. We specify how to compute the   *)

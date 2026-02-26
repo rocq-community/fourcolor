@@ -4,6 +4,7 @@ From mathcomp Require Import ssreflect ssrfun ssrbool eqtype ssrnat seq choice.
 From mathcomp Require Import path ssralg ssrint.
 From fourcolor Require Import real realplane realsyntax realprop.
 From fourcolor Require Import grid approx.
+Set SsrOldRewriteGoalsOrder.  (* change Set to Unset when porting the file, then remove the line when requiring MathComp >= 2.6 *)
 
 (******************************************************************************)
 (*   We use a special case of the compactness theorem for predicate logic to  *)

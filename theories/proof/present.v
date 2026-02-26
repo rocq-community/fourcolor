@@ -5,6 +5,7 @@ From mathcomp Require Import fintype path fingraph bigop ssralg ssrnum ssrint.
 From fourcolor Require Import hypermap geometry patch coloring birkhoff embed.
 From fourcolor Require Import quiz quiztree part redpart discharge hubcap.
 From fourcolor Require Import cfmap cfcontract cfreducible configurations.
+Set SsrOldRewriteGoalsOrder.  (* change Set to Unset when porting the file, then remove the line when requiring MathComp >= 2.6 *)
 
 (******************************************************************************)
 (*   This file defines the properties and the specialized scripting language  *)
