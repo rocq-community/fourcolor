@@ -4,6 +4,7 @@ From HB Require Import structures.
 From mathcomp Require Import ssreflect ssrfun ssrbool eqtype ssrnat seq choice.
 From mathcomp Require Import fintype.
 From fourcolor Require Import color.
+Set SsrOldRewriteGoalsOrder.  (* change Set to Unset when porting the file, then remove the line when requiring MathComp >= 2.6 *)
 
 (******************************************************************************)
 (*   Chromograms are words representing congruence classes of regions with    *)

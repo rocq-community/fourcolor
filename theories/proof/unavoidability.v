@@ -6,6 +6,7 @@ From fourcolor Require Import hypermap geometry coloring patch birkhoff part.
 From fourcolor Require Import discharge configurations hubcap present.
 From fourcolor Require Import present5 present6 present7 present8 present9.
 From fourcolor Require Import present10 present11.
+Set SsrOldRewriteGoalsOrder.  (* change Set to Unset when porting the file, then remove the line when requiring MathComp >= 2.6 *)
 
 (******************************************************************************)
 (*   The main unavoidability theorem: reducibility implies no minimal counter *)

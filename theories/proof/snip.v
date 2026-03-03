@@ -3,6 +3,7 @@
 From mathcomp Require Import ssreflect ssrfun ssrbool eqtype ssrnat seq choice.
 From mathcomp Require Import fintype path fingraph.
 From fourcolor Require Import hypermap jordan color geometry patch.
+Set SsrOldRewriteGoalsOrder.  (* change Set to Unset when porting the file, then remove the line when requiring MathComp >= 2.6 *)
 
 (******************************************************************************)
 (*   This file provides a construction for cutting a planar hypermmap G along *)

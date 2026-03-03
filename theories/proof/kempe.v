@@ -4,6 +4,7 @@ From mathcomp Require Import ssreflect ssrfun ssrbool eqtype ssrnat seq choice.
 From mathcomp Require Import fintype path fingraph.
 From fourcolor Require Import hypermap walkup jordan geometry color chromogram.
 From fourcolor Require Import coloring.
+Set SsrOldRewriteGoalsOrder.  (* change Set to Unset when porting the file, then remove the line when requiring MathComp >= 2.6 *)
 
 (******************************************************************************)
 (*   The proof of the Kempe closure property of the set of trace colorings of *)

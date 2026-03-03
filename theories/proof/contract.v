@@ -4,6 +4,7 @@ From mathcomp Require Import ssreflect ssrfun ssrbool eqtype ssrnat seq choice.
 From mathcomp Require Import fintype path fingraph.
 From fourcolor Require Import hypermap walkup geometry color coloring patch.
 From fourcolor Require Import snip revsnip birkhoff.
+Set SsrOldRewriteGoalsOrder.  (* change Set to Unset when porting the file, then remove the line when requiring MathComp >= 2.6 *)
 
 (******************************************************************************)
 (* The proof that there exists a contract coloring for any valid contract.    *)

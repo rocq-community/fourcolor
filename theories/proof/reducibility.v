@@ -6,6 +6,7 @@ From fourcolor Require Import task001to214 task215to234 task235to282.
 From fourcolor Require Import task283to302 task303to322 task323to485.
 From fourcolor Require Import task486to506 task507to541 task542to588.
 From fourcolor Require Import task589to633.
+Set SsrOldRewriteGoalsOrder.  (* change Set to Unset when porting the file, then remove the line when requiring MathComp >= 2.6 *)
 
 (******************************************************************************)
 (*   C-reducibility of all the configurations in the_configs, collating the   *)

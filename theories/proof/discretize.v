@@ -5,6 +5,7 @@ From mathcomp Require Import fintype path fingraph bigop ssralg ssrnum ssrint.
 From mathcomp Require Import div intdiv.
 From fourcolor Require Import hypermap geometry coloring grid matte gridmap.
 From fourcolor Require Import real realplane realprop approx.
+Set SsrOldRewriteGoalsOrder.  (* change Set to Unset when porting the file, then remove the line when requiring MathComp >= 2.6 *)
 
 (******************************************************************************)
 (* Discretizing the coloring problem for an arbitrary finite map. We compute  *)

@@ -3,6 +3,7 @@
 From mathcomp Require Import ssreflect ssrfun ssrbool eqtype ssrnat seq choice.
 From mathcomp Require Import fintype path fingraph.
 From fourcolor Require Import hypermap color geometry.
+Set SsrOldRewriteGoalsOrder.  (* change Set to Unset when porting the file, then remove the line when requiring MathComp >= 2.6 *)
 
 (******************************************************************************)
 (*    These "parts" are patterns for performing local matching on maps.       *)

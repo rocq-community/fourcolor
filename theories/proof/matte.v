@@ -3,6 +3,7 @@
 From mathcomp Require Import ssreflect ssrfun ssrbool eqtype ssrnat seq choice.
 From mathcomp Require Import path order ssralg ssrnum ssrint div intdiv.
 From fourcolor Require Import grid.
+Set SsrOldRewriteGoalsOrder.  (* change Set to Unset when porting the file, then remove the line when requiring MathComp >= 2.6 *)
 
 (******************************************************************************)
 (* Mattes are finite sets of grid squares that are delimited by a simple grid *)

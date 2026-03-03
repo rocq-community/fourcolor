@@ -4,6 +4,7 @@ From Corelib Require Import Setoid Morphisms.
 From mathcomp Require Import ssreflect ssrfun ssrbool eqtype ssrnat seq order.
 From mathcomp Require Import ssralg ssrnum ssrint rat.
 From fourcolor Require Import real.
+Set SsrOldRewriteGoalsOrder.  (* change Set to Unset when porting the file, then remove the line when requiring MathComp >= 2.6 *)
 
 (******************************************************************************)
 (*   Construcion of the real numbers as a complete totally ordered field.     *)

@@ -4,6 +4,7 @@ From mathcomp Require Import ssreflect ssrfun ssrbool ssrnat seq.
 From fourcolor Require Import cfmap cfreducible configurations.
 From fourcolor Require Import job001to106 job107to164 job165to189.
 From fourcolor Require Import job190to206 job207to214.
+Set SsrOldRewriteGoalsOrder.  (* change Set to Unset when porting the file, then remove the line when requiring MathComp >= 2.6 *)
 
 (******************************************************************************)
 (* Reducibility of configurations number 1 to 214, whose indices in           *)

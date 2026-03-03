@@ -4,6 +4,7 @@ From mathcomp Require Import ssreflect ssrfun ssrbool eqtype ssrnat seq choice.
 From mathcomp Require Import fintype path fingraph.
 From fourcolor Require Import hypermap geometry patch sew snip color chromogram.
 From fourcolor Require Import coloring kempe.
+Set SsrOldRewriteGoalsOrder.  (* change Set to Unset when porting the file, then remove the line when requiring MathComp >= 2.6 *)
 
 (******************************************************************************)
 (*   Dissecting a connected plain map along a proper ring, and its reverse    *)
