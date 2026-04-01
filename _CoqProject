@@ -5,6 +5,7 @@
 -arg -w -arg -redundant-canonical-projection
 -arg -w -arg -deprecated-hint-without-locality
 -arg -w -arg -deprecated-instance-without-locality
+-arg -w -arg -rewrite-rw
 
 theories/reals/real.v
 theories/reals/realsyntax.v
