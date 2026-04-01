@@ -216,8 +216,8 @@ Arguments succeed_by_hubcap hc {p0 p} red_check _ _ {G x}.
 
 Export PartSyntax.
 
-Arguments succeeds_in (p0 p)%part_scope.
-Arguments successful p%part_scope.
+Arguments succeeds_in (p0 p)%_part_scope.
+Arguments successful p%_part_scope.
 
 Notation "'Check' p1 'in' p0" := (succeeds_in p0 p1)
   (at level 10, p1, p0 at level 9,
