@@ -488,7 +488,8 @@ have [mr_p | mr'p] /= := boolP (p \in mring m).
     by case/orP; [case/pred2P=> ->; left; rewrite gedge2 ?halfg_face | right].
   have:= map_uniq (mring_simple m); rewrite -(rot_uniq i) Dr.
   rewrite (cat_uniq [:: _; _]) andbCA andbC => /andP[_] /hasPn/(_ p r_p).
-  rewrite !inE orbC => p'efd; rewrite gedge2 !inE orbA (negPf p'efd) /= in Dp.
+  (* Folded global fixpoints leave an empty list tail opaque to [!inE]. *)
+  rewrite !inE orbC => p'efd; rewrite gedge2 !inE ?in_nil ?orbF orbA (negPf p'efd) /= in Dp.
   by have:= mr_p; rewrite in_mring => /nandP[]; left; case/pred2P: Dp => ->.
 have:= mr'p; rewrite -(mem_rot i) Dr !inE orbA => /norP[_ /negPf->].
 apply/esym/nandP; left; apply: contraL mr_efd => /andP[/eqP/esym/same_halfg].
