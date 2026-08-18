@@ -34,7 +34,7 @@
 
   ## select an entry to build in the following `bundles` set
   ## defaults to "default"
-  default-bundle = "8.20";
+  default-bundle = "9.2";
 
   ## write one `bundles.name` attribute set per
   ## alternative configuration, the can be used to
@@ -42,30 +42,39 @@
   bundles = {
     "8.20".coqPackages = {
       coq.override.version = "8.20";
-      mathcomp.override.version = "master";
-      mathcomp-zify.override.version = "master";
-      mathcomp-algebra-tactics.override.version = "master";
-      mathcomp-finmap.override.version = "master";
-      graph-theory.override.version = "master";
     };
-    "9.0".coqPackages = {
+    "9.0" = { rocqPackages = {
+      rocq-core.override.version = "9.0";
+    }; coqPackages = {
       coq.override.version = "9.0";
-      mathcomp.override.version = "master";
-      mathcomp-zify.override.version = "master";
-      mathcomp-algebra-tactics.override.version = "master";
-      mathcomp-finmap.override.version = "master";
-      graph-theory.override.version = "master";
-    };
+    }; };
+    "9.1" = { rocqPackages = {
+      rocq-core.override.version = "9.1";
+    }; coqPackages = {
+      coq.override.version = "9.1";
+    }; };
+    "9.2" = { rocqPackages = {
+      rocq-core.override.version = "9.2";
+    }; coqPackages = {
+      coq.override.version = "9.2";
+    }; };
+    "9.3" = { rocqPackages = {
+      rocq-core.override.version = "9.3";
+    }; coqPackages = {
+      coq.override.version = "9.3";
+    }; };
     "master" = { rocqPackages = {
       rocq-core.override.version = "master";
       rocq-elpi.override.version = "master";
-      rocq-elpi.override.elpi-version = "2.0.7";
       hierarchy-builder.override.version = "master";
+      micromega-plugin.job = false;
+      micromega-plugin.override.version = "master";
+      mathcomp.override.version = "master";
+      mathcomp-finmap.override.version = "master";
       stdlib.override.version = "master";
     }; coqPackages = {
       coq.override.version = "master";
       coq-elpi.override.version = "master";
-      coq-elpi.override.elpi-version = "2.0.7";
       hierarchy-builder.override.version = "master";
       mathcomp.override.version = "master";
       stdlib.override.version = "master";
