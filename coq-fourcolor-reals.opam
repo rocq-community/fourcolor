@@ -16,7 +16,7 @@ build: [make "-C" "theories/reals" "-j%{jobs}%"]
 install: [make "-C" "theories/reals" "install"]
 depends: [
   ("coq" {>= "8.20" & < "8.21~"}
-  | "rocq-core" { (>= "9.0" & < "9.1~") | (= "dev") })
+  | "rocq-core" { >= "9.0" })
   "coq-mathcomp-ssreflect" {>= "2.5.0"}
   "coq-mathcomp-algebra"
   "coq-hierarchy-builder" {>= "1.5.0"}
