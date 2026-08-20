@@ -8,10 +8,6 @@
   ## of from the overlays located in `.nix/coq-overlays`
   attribute = "fourcolor";
 
-  ## Set this when the package has no rocqPackages version yet
-  ## (either in nixpkgs or in .nix/rocq-overlays)
-  no-rocq-yet = true;
-
   ## If you want to select a different attribute
   ## to serve as a basis for nix-shell edit this
   # shell-attribute = "{{nix_name}}";
@@ -40,28 +36,25 @@
   ## alternative configuration, the can be used to
   ## compute several ci jobs as well
   bundles = {
-    "9.0" = { rocqPackages = {
+    "9.0".rocqPackages = {
       rocq-core.override.version = "9.0";
-    }; coqPackages = {
       coq.override.version = "9.0";
-    }; };
-    "9.1" = { rocqPackages = {
+    };
+    "9.1".rocqPackages = {
       rocq-core.override.version = "9.1";
-    }; coqPackages = {
       coq.override.version = "9.1";
-    }; };
-    "9.2" = { rocqPackages = {
+    };
+    "9.2".rocqPackages = {
       rocq-core.override.version = "9.2";
-    }; coqPackages = {
       coq.override.version = "9.2";
-    }; };
-    "9.3" = { rocqPackages = {
+    };
+    "9.3".rocqPackages = {
       rocq-core.override.version = "9.3";
-    }; coqPackages = {
       coq.override.version = "9.3";
-    }; };
-    "master" = { rocqPackages = {
+    };
+    "master".rocqPackages = {
       rocq-core.override.version = "master";
+      coq.override.version = "master";
       rocq-elpi.override.version = "master";
       hierarchy-builder.override.version = "master";
       micromega-plugin.job = false;
@@ -69,17 +62,8 @@
       mathcomp.override.version = "master";
       mathcomp-finmap.override.version = "master";
       stdlib.override.version = "master";
-    }; coqPackages = {
-      coq.override.version = "master";
-      coq-elpi.override.version = "master";
-      hierarchy-builder.override.version = "master";
-      mathcomp.override.version = "master";
-      stdlib.override.version = "master";
-      mathcomp-zify.override.version = "master";
-      mathcomp-algebra-tactics.override.version = "master";
-      mathcomp-finmap.override.version = "master";
       graph-theory.override.version = "master";
-    }; };
+    };
 
   ## you may mark a package as a CI job as follows
   #  coqPackages.<another-pkg>.ci.job = "test";
