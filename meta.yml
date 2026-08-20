@@ -36,8 +36,8 @@ license:
   identifier: CECILL-B
 
 supported_coq_versions:
-  text: 8.20 or later
-  opam: '{>= "8.20"}'
+  text: 9.0 or later
+  opam: '{>= "9.0"}'
 
 tested_coq_opam_versions:
 - version: 'rocq-prover-dev'

@@ -40,9 +40,6 @@
   ## alternative configuration, the can be used to
   ## compute several ci jobs as well
   bundles = {
-    "8.20".coqPackages = {
-      coq.override.version = "8.20";
-    };
     "9.0" = { rocqPackages = {
       rocq-core.override.version = "9.0";
     }; coqPackages = {
