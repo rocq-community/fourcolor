@@ -6,9 +6,7 @@
 # pre-makefile::, this-clean:: and __always__:: may be extended      #
 # Additionally, the following variables may be customized:           #
 SUBDIRS?=
-COQBIN?=$(dir $(shell which coqtop))
-COQMAKEFILE?=$(COQBIN)coq_makefile
-COQDEP?=$(COQBIN)coqdep
+ROCQBIN?=$(dir $(shell which rocq))
 COQPROJECT?=_CoqProject
 COQMAKEOPTIONS?=
 COQMAKEFILEOPTIONS?=
@@ -23,14 +21,14 @@ VERBOSE?=V
 H:= $(if $(VERBOSE),,@)  # not used yet
 TOP     = $(dir $(lastword $(MAKEFILE_LIST)))
 COQMAKE = $(MAKE) -f Makefile.coq $(COQMAKEOPTIONS)
-BRANCH_coq:= $(shell $(COQBIN)coqtop -v | head -1 | grep -E '(trunk|master)' \
+BRANCH_coq:= $(shell $(ROCQBIN)rocq top -v | head -1 | grep -E '(trunk|master)' \
 	      | wc -l | sed 's/ *//g')
 
 # coq version:
 ifneq "$(BRANCH_coq)" "0"
 COQVVV:= dev
 else
-COQVVV:=$(shell $(COQBIN)coqtop --print-version | cut -d" " -f1)
+COQVVV:=$(shell $(ROCQBIN)rocq top --print-version | cut -d" " -f1)
 endif
 
 COQV:= $(shell echo $(COQVVV) | cut -d"." -f1)
@@ -43,7 +41,7 @@ all: config build
 .PHONY: pre-makefile
 
 Makefile.coq: pre-makefile $(COQPROJECT) Makefile
-	$(COQMAKEFILE) $(COQMAKEFILEOPTIONS) -f $(COQPROJECT) -o Makefile.coq
+	$(ROCQBIN)rocq makefile $(COQMAKEFILEOPTIONS) -f $(COQPROJECT) -o Makefile.coq
 
 # Global config, build, clean and distclean --------------------------
 config: sub-config this-config
