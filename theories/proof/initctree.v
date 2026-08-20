@@ -106,7 +106,7 @@ Lemma ctree_add_dyck_leaf_of m n d :
 Proof.
 elim: n m d => [|n IHn] m /=; first by rewrite addn0 gen_dyck_all_close.
 elim: m => [|m IHm] d; rewrite doubleS /=; first by rewrite addn0 IHn.
-by rewrite IHm IHn doubleS addnA -?addnE !addnS.  (* TODO: remove ?addnE when requiring Coq >= 8.21 *)
+by rewrite IHm IHn doubleS addnA !addnS.
 Qed.
 
 Lemma ctree_leaf_table_size h : size (ctree_leaf_table h) = h.+1.
